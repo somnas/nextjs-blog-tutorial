@@ -1,14 +1,8 @@
 import Layout from '../../components/layout';
-import { getSlugs } from '../../services';
+import { getPost, getSlugs } from '../../services';
 
 export async function getStaticPaths() {
-    const data = getSlugs();
-
-    const paths = data.map(post => {
-        return {
-            params: { slug: post.slug }
-        }
-    })
+    const paths = getSlugs();
 
     return {
         paths,
@@ -16,6 +10,21 @@ export async function getStaticPaths() {
     };
 }
 
-export default function Post() {
-    return <Layout>...</Layout>;
+export async function getStaticProps({ params }) {
+    const postData = (await getPost()) || [];
+    return {
+        props: { postData },
+    };
+}
+
+export default function Post({ postData }) {
+    return (
+        <Layout>
+            {postData.title}
+            <br />
+            {postData.excerpt}
+            <br />
+            {postData.createdAt}
+        </Layout>
+    );
 }
