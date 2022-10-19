@@ -65,8 +65,8 @@ export const getSlugs = async () => {
 
 export const getPost = async ({ slug }) => {
 	const query = gql`
-		query GetPost {
-			posts(where: {slug: slug}) {
+		query GetPost($slug: String) {
+			posts(where: {slug: $slug}) {
 				id
 				slug
 				title
