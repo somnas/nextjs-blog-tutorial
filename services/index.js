@@ -57,8 +57,9 @@ export const getSlugs = async () => {
 	}));
 
 	return result.posts.map(post => {
+		//console.log(post);
 		return {
-			params: { slug: post.slug }
+			params: { 'slug': post.slug }
 		}
 	})
 };
@@ -73,10 +74,15 @@ export const getPost = async ({ slug }) => {
 				excerpt
 				createdAt
 			}
+		},
+		variables: {
+			{ slug }
 		}
   `;
 
-	const result = await request(graphqlAPI, query);
+	console.log(slug);
+
+	const result = await request(graphqlAPI, query, slug);
 
 	return result.posts;
 };
