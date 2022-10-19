@@ -1,5 +1,7 @@
 import Layout from '../../components/layout';
+import Head from 'next/head';
 import { getPost, getSlugs } from '../../services';
+import Date from '../../components/date';
 
 export async function getStaticPaths() {
     const paths = await getSlugs();
@@ -22,11 +24,14 @@ export async function getStaticProps({ params }) {
 export default function Post({ postData }) {
     return (
         <Layout>
-            {postData.title}
+            <Head>
+                <title>{postData.title}</title>
+            </Head>
+            <h1>{postData.title}</h1>
             <br />
             {postData.excerpt}
             <br />
-            {postData.createdAt}
+            <Date dateString={postData.createdAt} />
         </Layout>
     );
 }
