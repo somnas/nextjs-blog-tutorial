@@ -2,6 +2,7 @@ import Layout from '../../components/layout';
 import Head from 'next/head';
 import { getPost, getSlugs } from '../../services';
 import Date from '../../components/date';
+import utilStyles from '../../styles/utils.module.css';
 
 export async function getStaticPaths() {
     const paths = await getSlugs();
@@ -27,11 +28,17 @@ export default function Post({ postData }) {
             <Head>
                 <title>{postData.title}</title>
             </Head>
-            <h1>{postData.title}</h1>
-            <br />
-            {postData.excerpt}
-            <br />
-            <Date dateString={postData.createdAt} />
+            <article>
+                <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+                <br />
+                <p>
+                    {postData.excerpt}
+                </p>
+                <br />
+                <div className={utilStyles.lightText}>
+                    <Date dateString={postData.createdAt} />
+                </div>
+            </article>
         </Layout>
     );
 }
