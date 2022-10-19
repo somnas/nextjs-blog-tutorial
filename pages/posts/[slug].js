@@ -2,21 +2,16 @@ import Layout from '../../components/layout';
 import { getPost, getSlugs } from '../../services';
 
 export async function getStaticPaths() {
-    const paths = getSlugs();
-    //console.log(paths);
+    const paths = await getSlugs();
     return {
-        paths: [
-            {
-                params: {slug: 'react-testing'}
-            }
-        ],
+        paths,
         fallback: false,
     };
 }
 
 export async function getStaticProps({ params }) {
-    const postData = (await getPost(params.slug)) || [];
-    
+    const postData = (await getPost({ slug: params.slug })) || [];
+
     return {
         props: {
             postData,
@@ -25,7 +20,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ postData }) {
-    console.log(postData);
     return (
         <Layout>
             {postData.title}
