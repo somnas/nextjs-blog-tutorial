@@ -50,17 +50,23 @@ export const getSlugs = async () => {
 
 	const result = await request(graphqlAPI, query);
 
-	return result.map(post => {
-        return {
-            params: { slug: post.slug.toString() }
-        }
-    })
+	console.log(result.posts.map(post => {
+		return {
+			params: { slug: post.slug }
+		}
+	}));
+
+	return result.posts.map(post => {
+		return {
+			params: { slug: post.slug }
+		}
+	})
 };
 
-export const getPost = async () => {
+export const getPost = async ({ slug }) => {
 	const query = gql`
 		query GetPost {
-			posts(where: {slug: "react-testing"}) {
+			posts(where: {slug: slug}) {
 				id
 				slug
 				title
