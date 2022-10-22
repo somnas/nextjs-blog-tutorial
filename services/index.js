@@ -41,7 +41,7 @@ export const getPosts = async () => {
 
 /* GET ALL SLUGS */
 export const getSlugs = async () => {
-
+	
 	const query = gql`
 		query GetSlugs {
 			posts {
