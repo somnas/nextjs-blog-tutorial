@@ -3,15 +3,16 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
+import { Target } from '@radix-ui/react-icons'
 
 const name = 'Eriksson';
-export const siteTitle = 'Next.js Sample Website';
+export const siteTitle = 'SWG Blog';
 
 export default function Layout({ children, home }) {
   return (
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={"/target.png"} />
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
