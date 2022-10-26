@@ -41,7 +41,6 @@ export const getPosts = async () => {
 
 /* GET ALL SLUGS */
 export const getSlugs = async () => {
-	
 	const query = gql`
 		query GetSlugs {
 			posts {
@@ -61,8 +60,7 @@ export const getSlugs = async () => {
 };
 
 /* GET SINGLE POST */
-export const getPost = async ({ slug }) => {
-	
+export const getPostBySlug = async ({ slug }) => {
 	const query = gql`
 		query GetPost($slug: String) {
 			post(where: {slug: $slug}) {
